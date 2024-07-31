@@ -4,6 +4,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 from pyquery import PyQuery as pq
 import openpyxl
 from time import sleep
@@ -19,7 +21,7 @@ class tmall_infos:
         options.add_experimental_option("prefs", {"profile.managed_default_content_settings.images": 2})
         options.add_experimental_option('excludeSwitches', ['enable-automation'])
 
-        self.browser = webdriver.Chrome(options=options)
+        self.browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
         self.wait = WebDriverWait(self.browser, 60)
     
     def login(self):
